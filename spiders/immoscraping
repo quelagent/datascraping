@@ -1,0 +1,330 @@
+2019-03-06 11:05:06 [scrapy.utils.log] INFO: Scrapy 1.6.0 started (bot: immoscraping)
+2019-03-06 11:05:06 [scrapy.utils.log] INFO: Versions: lxml 4.3.0.0, libxml2 2.9.5, cssselect 1.0.3, parsel 1.5.1, w3lib 1.20.0, Twisted 18.9.0, Python 3.7.2 (tags/v3.7.2:9a3ffc0492, Dec 23 2018, 23:09:28) [MSC v.1916 64 bit (AMD64)], pyOpenSSL 19.0.0 (OpenSSL 1.1.1a  20 Nov 2018), cryptography 2.5, Platform Windows-10-10.0.17763-SP0
+2019-03-06 11:05:06 [scrapy.crawler] INFO: Overridden settings: {'BOT_NAME': 'immoscraping', 'LOG_FILE': 'immoscraping', 'NEWSPIDER_MODULE': 'immoscraping.spiders', 'SPIDER_MODULES': ['immoscraping.spiders']}
+2019-03-06 11:05:07 [scrapy.extensions.telnet] INFO: Telnet Password: b9cc362ee660e8be
+2019-03-06 11:05:08 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.logstats.LogStats']
+2019-03-06 11:05:10 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware',
+ 'immoscraping.middlewares.LuminatiProxyMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2019-03-06 11:05:10 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2019-03-06 11:05:10 [scrapy.middleware] INFO: Enabled item pipelines:
+['immoscraping.pipelines.ImmoscrapingPipeline']
+2019-03-06 11:05:10 [scrapy.core.engine] INFO: Spider opened
+2019-03-06 11:05:11 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2019-03-06 11:05:11 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+2019-03-06 11:05:11 [scrapy.core.engine] ERROR: Error while obtaining start requests
+Traceback (most recent call last):
+  File "c:\users\oussama\pycharmprojects\scraping\venv\lib\site-packages\scrapy\core\engine.py", line 127, in _next_request
+    request = next(slot.start_requests)
+  File "C:\Users\Oussama\PycharmProjects\scraping\immoscraping\immoscraping\spiders\selogerAdsSpider.py", line 63, in start_requests
+    yield scrapy.Request(url=self.inputUrl, callback=self.parse)
+  File "c:\users\oussama\pycharmprojects\scraping\venv\lib\site-packages\scrapy\http\request\__init__.py", line 25, in __init__
+    self._set_url(url)
+  File "c:\users\oussama\pycharmprojects\scraping\venv\lib\site-packages\scrapy\http\request\__init__.py", line 56, in _set_url
+    raise TypeError('Request url must be str or unicode, got %s:' % type(url).__name__)
+TypeError: Request url must be str or unicode, got NoneType:
+2019-03-06 11:05:11 [scrapy.core.engine] INFO: Closing spider (finished)
+2019-03-06 11:05:11 [scrapy.utils.signal] ERROR: Error caught on signal handler: <bound method SelogerAdsSpider.spider_closed of <SelogerAdsSpider 'selogeradsspider' at 0x22c77d90c88>>
+Traceback (most recent call last):
+  File "c:\users\oussama\pycharmprojects\scraping\venv\lib\site-packages\twisted\internet\defer.py", line 151, in maybeDeferred
+    result = f(*args, **kw)
+  File "c:\users\oussama\pycharmprojects\scraping\venv\lib\site-packages\pydispatch\robustapply.py", line 55, in robustApply
+    return receiver(*arguments, **named)
+  File "C:\Users\Oussama\PycharmProjects\scraping\immoscraping\immoscraping\spiders\selogerAdsSpider.py", line 29, in spider_closed
+    self.context[self.urlCorrelationId]=  spider.crawler.stats.get_value('log_count/ERROR')
+TypeError: 'NoneType' object does not support item assignment
+2019-03-06 11:05:11 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'crawled_correlationId': None,
+ 'crawled_url': None,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2019, 3, 6, 10, 5, 11, 742826),
+ 'log_count/ERROR': 2,
+ 'log_count/INFO': 9,
+ 'start_time': datetime.datetime(2019, 3, 6, 10, 5, 11, 508949)}
+2019-03-06 11:05:11 [scrapy.core.engine] INFO: Spider closed (finished)
+2019-03-06 11:13:58 [scrapy.utils.log] INFO: Scrapy 1.6.0 started (bot: immoscraping)
+2019-03-06 11:13:58 [scrapy.utils.log] INFO: Versions: lxml 4.3.0.0, libxml2 2.9.5, cssselect 1.0.3, parsel 1.5.1, w3lib 1.20.0, Twisted 18.9.0, Python 3.7.2 (tags/v3.7.2:9a3ffc0492, Dec 23 2018, 23:09:28) [MSC v.1916 64 bit (AMD64)], pyOpenSSL 19.0.0 (OpenSSL 1.1.1a  20 Nov 2018), cryptography 2.5, Platform Windows-10-10.0.17763-SP0
+2019-03-06 11:14:07 [scrapy.utils.log] INFO: Scrapy 1.6.0 started (bot: immoscraping)
+2019-03-06 11:14:07 [scrapy.utils.log] INFO: Versions: lxml 4.3.0.0, libxml2 2.9.5, cssselect 1.0.3, parsel 1.5.1, w3lib 1.20.0, Twisted 18.9.0, Python 3.7.2 (tags/v3.7.2:9a3ffc0492, Dec 23 2018, 23:09:28) [MSC v.1916 64 bit (AMD64)], pyOpenSSL 19.0.0 (OpenSSL 1.1.1a  20 Nov 2018), cryptography 2.5, Platform Windows-10-10.0.17763-SP0
+2019-03-06 11:14:07 [scrapy.crawler] INFO: Overridden settings: {'BOT_NAME': 'immoscraping', 'LOG_FILE': 'immoscraping', 'NEWSPIDER_MODULE': 'immoscraping.spiders', 'SPIDER_MODULES': ['immoscraping.spiders']}
+2019-03-06 11:14:07 [scrapy.extensions.telnet] INFO: Telnet Password: f11e8a664cd9be43
+2019-03-06 11:14:07 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.logstats.LogStats']
+2019-03-06 11:14:08 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware',
+ 'immoscraping.middlewares.LuminatiProxyMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2019-03-06 11:14:08 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2019-03-06 11:14:08 [scrapy.middleware] INFO: Enabled item pipelines:
+['immoscraping.pipelines.ImmoscrapingPipeline']
+2019-03-06 11:14:08 [scrapy.core.engine] INFO: Spider opened
+2019-03-06 11:14:08 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2019-03-06 11:14:08 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+2019-03-06 11:14:08 [scrapy.core.engine] ERROR: Error while obtaining start requests
+Traceback (most recent call last):
+  File "c:\users\oussama\pycharmprojects\scraping\venv\lib\site-packages\scrapy\core\engine.py", line 127, in _next_request
+    request = next(slot.start_requests)
+  File "C:\Users\Oussama\PycharmProjects\scraping\immoscraping\immoscraping\spiders\selogerAdsSpider.py", line 63, in start_requests
+    yield scrapy.Request(url=self.inputUrl, callback=self.parse)
+  File "c:\users\oussama\pycharmprojects\scraping\venv\lib\site-packages\scrapy\http\request\__init__.py", line 25, in __init__
+    self._set_url(url)
+  File "c:\users\oussama\pycharmprojects\scraping\venv\lib\site-packages\scrapy\http\request\__init__.py", line 56, in _set_url
+    raise TypeError('Request url must be str or unicode, got %s:' % type(url).__name__)
+TypeError: Request url must be str or unicode, got NoneType:
+2019-03-06 11:14:08 [scrapy.core.engine] INFO: Closing spider (finished)
+2019-03-06 11:14:08 [scrapy.utils.signal] ERROR: Error caught on signal handler: <bound method SelogerAdsSpider.spider_closed of <SelogerAdsSpider 'selogeradsspider' at 0x2c3ce09aeb8>>
+Traceback (most recent call last):
+  File "c:\users\oussama\pycharmprojects\scraping\venv\lib\site-packages\twisted\internet\defer.py", line 151, in maybeDeferred
+    result = f(*args, **kw)
+  File "c:\users\oussama\pycharmprojects\scraping\venv\lib\site-packages\pydispatch\robustapply.py", line 55, in robustApply
+    return receiver(*arguments, **named)
+  File "C:\Users\Oussama\PycharmProjects\scraping\immoscraping\immoscraping\spiders\selogerAdsSpider.py", line 29, in spider_closed
+    self.context[self.urlCorrelationId]=  spider.crawler.stats.get_value('log_count/ERROR')
+TypeError: 'NoneType' object does not support item assignment
+2019-03-06 11:14:08 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'crawled_correlationId': None,
+ 'crawled_url': None,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2019, 3, 6, 10, 14, 8, 170637),
+ 'log_count/ERROR': 2,
+ 'log_count/INFO': 9,
+ 'start_time': datetime.datetime(2019, 3, 6, 10, 14, 8, 162597)}
+2019-03-06 11:14:08 [scrapy.core.engine] INFO: Spider closed (finished)
+2019-03-12 14:32:11 [scrapy.utils.log] INFO: Scrapy 1.5.2 started (bot: immoscraping)
+2019-03-12 14:32:11 [scrapy.utils.log] INFO: Versions: lxml 4.3.0.0, libxml2 2.9.5, cssselect 1.0.3, parsel 1.5.1, w3lib 1.20.0, Twisted 18.9.0, Python 3.7.2 (tags/v3.7.2:9a3ffc0492, Dec 23 2018, 23:09:28) [MSC v.1916 64 bit (AMD64)], pyOpenSSL 19.0.0 (OpenSSL 1.1.1a  20 Nov 2018), cryptography 2.5, Platform Windows-10-10.0.17763-SP0
+2019-03-12 14:32:11 [stomp.py] INFO: Attempting connection to host localhost, port 61613
+2019-03-12 14:32:11 [stomp.py] INFO: Established connection to host localhost, port 61613
+2019-03-12 14:32:11 [stomp.py] INFO: Starting receiver loop
+2019-03-12 14:32:11 [stomp.py] DEBUG: Sending frame: [b'STOMP', b'\n', b'accept-version:1.1\n', b'login:admin\n', b'passcode:admin\n', b'\n', b'\x00']
+2019-03-12 14:32:12 [stomp.py] DEBUG: Received frame: 'CONNECTED', headers={'server': 'ActiveMQ/5.15.8', 'heart-beat': '0,0', 'session': 'ID:DESKTOP-7Q4NIDE-49671-1552298896386-3:31', 'version': '1.1'}, body=''
+2019-03-12 14:32:14 [scrapy.crawler] INFO: Overridden settings: {'BOT_NAME': 'immoscraping', 'LOG_FILE': 'immoscraping', 'NEWSPIDER_MODULE': 'immoscraping.spiders', 'SPIDER_MODULES': ['immoscraping.spiders']}
+2019-03-12 14:32:14 [scrapy.extensions.telnet] INFO: Telnet Password: 5ba25fee38d2fe14
+2019-03-12 14:32:15 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.logstats.LogStats']
+2019-03-12 14:32:17 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware',
+ 'immoscraping.middlewares.LuminatiProxyMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2019-03-12 14:32:17 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2019-03-12 14:32:17 [scrapy.middleware] INFO: Enabled item pipelines:
+['immoscraping.pipelines.ImmoscrapingPipeline']
+2019-03-12 14:32:17 [scrapy.core.engine] INFO: Spider opened
+2019-03-12 14:32:17 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2019-03-12 14:32:17 [scrapy.extensions.telnet] DEBUG: Telnet console listening on 127.0.0.1:6023
+2019-03-12 14:32:17 [scrapy.core.engine] ERROR: Error while obtaining start requests
+Traceback (most recent call last):
+  File "C:\Users\Oussama\AppData\Local\Programs\Python\Python37\lib\site-packages\scrapy\core\engine.py", line 127, in _next_request
+    request = next(slot.start_requests)
+  File "C:\Users\Oussama\PycharmProjects\scrape\immoscraping2\immoscraping\spiders\selogerAdsSpider.py", line 64, in start_requests
+    yield scrapy.Request(url=self.inputUrl, callback=self.parse)
+  File "C:\Users\Oussama\AppData\Local\Programs\Python\Python37\lib\site-packages\scrapy\http\request\__init__.py", line 25, in __init__
+    self._set_url(url)
+  File "C:\Users\Oussama\AppData\Local\Programs\Python\Python37\lib\site-packages\scrapy\http\request\__init__.py", line 56, in _set_url
+    raise TypeError('Request url must be str or unicode, got %s:' % type(url).__name__)
+TypeError: Request url must be str or unicode, got NoneType:
+2019-03-12 14:32:17 [scrapy.core.engine] INFO: Closing spider (finished)
+2019-03-12 14:32:17 [scrapy.utils.signal] ERROR: Error caught on signal handler: <bound method SelogerAdsSpider.spider_closed of <SelogerAdsSpider 'selogeradsspider' at 0x2272e9a7f28>>
+Traceback (most recent call last):
+  File "C:\Users\Oussama\AppData\Local\Programs\Python\Python37\lib\site-packages\twisted\internet\defer.py", line 151, in maybeDeferred
+    result = f(*args, **kw)
+  File "C:\Users\Oussama\AppData\Local\Programs\Python\Python37\lib\site-packages\pydispatch\robustapply.py", line 55, in robustApply
+    return receiver(*arguments, **named)
+  File "C:\Users\Oussama\PycharmProjects\scrape\immoscraping2\immoscraping\spiders\selogerAdsSpider.py", line 30, in spider_closed
+    self.context[self.urlCorrelationId]=  spider.crawler.stats.get_value('log_count/ERROR')
+TypeError: 'NoneType' object does not support item assignment
+2019-03-12 14:32:17 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'crawled_correlationId': None,
+ 'crawled_url': None,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2019, 3, 12, 13, 32, 17, 636554),
+ 'log_count/DEBUG': 1,
+ 'log_count/ERROR': 2,
+ 'log_count/INFO': 8,
+ 'start_time': datetime.datetime(2019, 3, 12, 13, 32, 17, 480834)}
+2019-03-12 14:32:17 [scrapy.core.engine] INFO: Spider closed (finished)
+2019-03-12 14:36:31 [scrapy.utils.log] INFO: Scrapy 1.5.2 started (bot: immoscraping)
+2019-03-12 14:36:31 [scrapy.utils.log] INFO: Versions: lxml 4.3.0.0, libxml2 2.9.5, cssselect 1.0.3, parsel 1.5.1, w3lib 1.20.0, Twisted 18.9.0, Python 3.7.2 (tags/v3.7.2:9a3ffc0492, Dec 23 2018, 23:09:28) [MSC v.1916 64 bit (AMD64)], pyOpenSSL 19.0.0 (OpenSSL 1.1.1a  20 Nov 2018), cryptography 2.5, Platform Windows-10-10.0.17763-SP0
+2019-03-12 14:36:31 [stomp.py] INFO: Attempting connection to host localhost, port 61613
+2019-03-12 14:36:31 [stomp.py] INFO: Established connection to host localhost, port 61613
+2019-03-12 14:36:31 [stomp.py] INFO: Starting receiver loop
+2019-03-12 14:36:31 [stomp.py] DEBUG: Sending frame: [b'STOMP', b'\n', b'accept-version:1.1\n', b'login:admin\n', b'passcode:admin\n', b'\n', b'\x00']
+2019-03-12 14:36:31 [stomp.py] DEBUG: Received frame: 'CONNECTED', headers={'server': 'ActiveMQ/5.15.8', 'heart-beat': '0,0', 'session': 'ID:DESKTOP-7Q4NIDE-49671-1552298896386-3:32', 'version': '1.1'}, body=''
+2019-03-12 14:36:32 [scrapy.crawler] INFO: Overridden settings: {'BOT_NAME': 'immoscraping', 'LOG_FILE': 'immoscraping', 'NEWSPIDER_MODULE': 'immoscraping.spiders', 'SPIDER_MODULES': ['immoscraping.spiders']}
+2019-03-12 14:36:32 [scrapy.extensions.telnet] INFO: Telnet Password: 7eb081e07bc69c9e
+2019-03-12 14:36:32 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.logstats.LogStats']
+2019-03-12 14:36:33 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware',
+ 'immoscraping.middlewares.LuminatiProxyMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2019-03-12 14:36:33 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2019-03-12 14:36:33 [scrapy.middleware] INFO: Enabled item pipelines:
+['immoscraping.pipelines.ImmoscrapingPipeline']
+2019-03-12 14:36:33 [scrapy.core.engine] INFO: Spider opened
+2019-03-12 14:36:33 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2019-03-12 14:36:33 [scrapy.extensions.telnet] DEBUG: Telnet console listening on 127.0.0.1:6023
+2019-03-12 14:36:33 [scrapy.core.engine] ERROR: Error while obtaining start requests
+Traceback (most recent call last):
+  File "C:\Users\Oussama\AppData\Local\Programs\Python\Python37\lib\site-packages\scrapy\core\engine.py", line 127, in _next_request
+    request = next(slot.start_requests)
+  File "C:\Users\Oussama\PycharmProjects\scrape\immoscraping2\immoscraping\spiders\selogerAdsSpider.py", line 64, in start_requests
+    yield scrapy.Request(url=self.inputUrl, callback=self.parse)
+  File "C:\Users\Oussama\AppData\Local\Programs\Python\Python37\lib\site-packages\scrapy\http\request\__init__.py", line 25, in __init__
+    self._set_url(url)
+  File "C:\Users\Oussama\AppData\Local\Programs\Python\Python37\lib\site-packages\scrapy\http\request\__init__.py", line 56, in _set_url
+    raise TypeError('Request url must be str or unicode, got %s:' % type(url).__name__)
+TypeError: Request url must be str or unicode, got NoneType:
+2019-03-12 14:36:33 [scrapy.core.engine] INFO: Closing spider (finished)
+2019-03-12 14:36:33 [scrapy.utils.signal] ERROR: Error caught on signal handler: <bound method SelogerAdsSpider.spider_closed of <SelogerAdsSpider 'selogeradsspider' at 0x2e2afa67f60>>
+Traceback (most recent call last):
+  File "C:\Users\Oussama\AppData\Local\Programs\Python\Python37\lib\site-packages\twisted\internet\defer.py", line 151, in maybeDeferred
+    result = f(*args, **kw)
+  File "C:\Users\Oussama\AppData\Local\Programs\Python\Python37\lib\site-packages\pydispatch\robustapply.py", line 55, in robustApply
+    return receiver(*arguments, **named)
+  File "C:\Users\Oussama\PycharmProjects\scrape\immoscraping2\immoscraping\spiders\selogerAdsSpider.py", line 30, in spider_closed
+    self.context[self.urlCorrelationId]=  spider.crawler.stats.get_value('log_count/ERROR')
+TypeError: 'NoneType' object does not support item assignment
+2019-03-12 14:36:33 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'crawled_correlationId': None,
+ 'crawled_url': None,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2019, 3, 12, 13, 36, 33, 463036),
+ 'log_count/DEBUG': 1,
+ 'log_count/ERROR': 2,
+ 'log_count/INFO': 8,
+ 'start_time': datetime.datetime(2019, 3, 12, 13, 36, 33, 362179)}
+2019-03-12 14:36:33 [scrapy.core.engine] INFO: Spider closed (finished)
+2019-03-12 14:36:55 [scrapy.utils.log] INFO: Scrapy 1.5.2 started (bot: immoscraping)
+2019-03-12 14:36:55 [scrapy.utils.log] INFO: Versions: lxml 4.3.0.0, libxml2 2.9.5, cssselect 1.0.3, parsel 1.5.1, w3lib 1.20.0, Twisted 18.9.0, Python 3.7.2 (tags/v3.7.2:9a3ffc0492, Dec 23 2018, 23:09:28) [MSC v.1916 64 bit (AMD64)], pyOpenSSL 19.0.0 (OpenSSL 1.1.1a  20 Nov 2018), cryptography 2.5, Platform Windows-10-10.0.17763-SP0
+2019-03-12 14:36:55 [stomp.py] INFO: Attempting connection to host localhost, port 61613
+2019-03-12 14:36:55 [stomp.py] INFO: Established connection to host localhost, port 61613
+2019-03-12 14:36:55 [stomp.py] INFO: Starting receiver loop
+2019-03-12 14:36:55 [stomp.py] DEBUG: Sending frame: [b'STOMP', b'\n', b'accept-version:1.1\n', b'login:admin\n', b'passcode:admin\n', b'\n', b'\x00']
+2019-03-12 14:36:55 [stomp.py] DEBUG: Received frame: 'CONNECTED', headers={'server': 'ActiveMQ/5.15.8', 'heart-beat': '0,0', 'session': 'ID:DESKTOP-7Q4NIDE-49671-1552298896386-3:33', 'version': '1.1'}, body=''
+2019-03-12 14:36:57 [scrapy.crawler] INFO: Overridden settings: {'BOT_NAME': 'immoscraping', 'LOG_FILE': 'immoscraping', 'NEWSPIDER_MODULE': 'immoscraping.spiders', 'SPIDER_MODULES': ['immoscraping.spiders']}
+2019-03-12 14:36:57 [scrapy.extensions.telnet] INFO: Telnet Password: 90609fd664c4f035
+2019-03-12 14:36:57 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.logstats.LogStats']
+2019-03-12 14:36:57 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy_fake_useragent.middleware.RandomUserAgentMiddleware',
+ 'immoscraping.middlewares.LuminatiProxyMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2019-03-12 14:36:57 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2019-03-12 14:36:57 [scrapy.middleware] INFO: Enabled item pipelines:
+['immoscraping.pipelines.ImmoscrapingPipeline']
+2019-03-12 14:36:57 [scrapy.core.engine] INFO: Spider opened
+2019-03-12 14:36:57 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2019-03-12 14:36:57 [scrapy.extensions.telnet] DEBUG: Telnet console listening on 127.0.0.1:6023
+2019-03-12 14:36:57 [scrapy.core.engine] ERROR: Error while obtaining start requests
+Traceback (most recent call last):
+  File "C:\Users\Oussama\AppData\Local\Programs\Python\Python37\lib\site-packages\scrapy\core\engine.py", line 127, in _next_request
+    request = next(slot.start_requests)
+  File "C:\Users\Oussama\PycharmProjects\scrape\immoscraping2\immoscraping\spiders\selogerAdsSpider.py", line 64, in start_requests
+    yield scrapy.Request(url=self.inputUrl, callback=self.parse)
+  File "C:\Users\Oussama\AppData\Local\Programs\Python\Python37\lib\site-packages\scrapy\http\request\__init__.py", line 25, in __init__
+    self._set_url(url)
+  File "C:\Users\Oussama\AppData\Local\Programs\Python\Python37\lib\site-packages\scrapy\http\request\__init__.py", line 56, in _set_url
+    raise TypeError('Request url must be str or unicode, got %s:' % type(url).__name__)
+TypeError: Request url must be str or unicode, got NoneType:
+2019-03-12 14:36:57 [scrapy.core.engine] INFO: Closing spider (finished)
+2019-03-12 14:36:57 [scrapy.utils.signal] ERROR: Error caught on signal handler: <bound method SelogerAdsSpider.spider_closed of <SelogerAdsSpider 'selogeradsspider' at 0x23a0c178f60>>
+Traceback (most recent call last):
+  File "C:\Users\Oussama\AppData\Local\Programs\Python\Python37\lib\site-packages\twisted\internet\defer.py", line 151, in maybeDeferred
+    result = f(*args, **kw)
+  File "C:\Users\Oussama\AppData\Local\Programs\Python\Python37\lib\site-packages\pydispatch\robustapply.py", line 55, in robustApply
+    return receiver(*arguments, **named)
+  File "C:\Users\Oussama\PycharmProjects\scrape\immoscraping2\immoscraping\spiders\selogerAdsSpider.py", line 30, in spider_closed
+    self.context[self.urlCorrelationId]=  spider.crawler.stats.get_value('log_count/ERROR')
+TypeError: 'NoneType' object does not support item assignment
+2019-03-12 14:36:57 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'crawled_correlationId': None,
+ 'crawled_url': None,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2019, 3, 12, 13, 36, 57, 856020),
+ 'log_count/DEBUG': 1,
+ 'log_count/ERROR': 2,
+ 'log_count/INFO': 8,
+ 'start_time': datetime.datetime(2019, 3, 12, 13, 36, 57, 845030)}
+2019-03-12 14:36:57 [scrapy.core.engine] INFO: Spider closed (finished)
