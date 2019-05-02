@@ -13,7 +13,7 @@ import stomp
 from elasticsearch import Elasticsearch
 from marshmallow import Schema, fields, pprint
 import argparse
-
+import json
 crawlerResults = None
 
 
@@ -140,7 +140,7 @@ def on_item_passed(item):
         print(item["RealEstate_surface"])
         print(item["Realtor_logo"])
         print(item["RealEstate_img"])
-        print(item["RealEstate_Profile"])
+        print(item["Realtor_Profile"])
         print(item["RealEstate_zip"])
         print(item["RealEstate_trans"])
         print(item["RealEstate_title"])
@@ -155,26 +155,47 @@ def on_item_passed(item):
         jsonencoder = ScrapyJSONEncoder()
         realtorjson = jsonencoder.encode(item)
         """
-        titr = dict(Title=item["RealEstate_title"])
-        transty = dict(TransactionType=item["RealEstate_trans"])
-        type = dict(Type=item["RealEstate_type"])
-        id = dict(externId=item["RealtorWebId"])
-        desc = dict(Description=item["RealEstate_desc"])
-        Realtor = dict(externID=item["RealtorId"], Name=item["RealtorName"], Phone=item["RealtorPhone"], Siren=item["RealtroSiren"], LogoUrl=item["Realtor_logo"], Adress=item["RealtorAddress"])
-        Room = dict(Pieces=item["RealEstate_pieces"])
-        Bed = dict(Chambres=item["RealEstate_nbrooms"])
-        Feat = dict(Surface=item["RealEstate_surface"], SurfaceUnite="m²")
-        prix = dict(Price=item["RealEstate_price"], PriceUnit="€ FAI*")
-        Addres = dict(Ville=item["RealEstate_Adress"], ZipCode=item["RealEstate_zip"])
-        date = dict(CreationDate=item["Time"])
+        Real = WebRealto()
+        Real.externId = item["RealtorWebId"]
+        Real.Realtor_Siren = item["RealtroSiren"]
+        Real.Realtor_Name = item["RealtorName"]
+        Real.Realtor_Address = item["RealtorAddress"]
+        Real.Realtor_Phone_Number = item["RealtorPhone"]
+        Real.Realtor_Logo = item["Realtor_logo"]
+        Real.Realtor_Website = item["RealtorWebSite"]
+        Real.Realtor_Seloger_Profile = item["Realtor_Profile"]
+
+        add = Address()
+        add.RealEstate_Adress = item["RealEstate_Adress"]
+        add.RealEstate_Zip_Code = item["RealEstate_zip"]
+
+        pr = Price()
+        pr.Realestate_Price = item["RealEstate_price"]
+        pr.Realestate_Price_Unite = "€ FAI*"
+
+        featu = Feature()
+        featu.Realestate_Surface = item["RealEstate_surface"]
+        featu.Realestate_Surface_Unite = "m²"
         for v in feat:
-            featu = dict(Feature=v)
+            featu.RealEstate_Features = v
 
-        ads = dict(Features=featu, TransactionType=transty, Type=type, externId=id, Title=titr, Description=desc, Rooms=Room, Beds=Bed, Surface = Feat, Adresse = Addres, Price = prix, WebRealtor=Realtor, CreationDate=date)
-        ads1 = WebAds()
-        realtor = ads1.dump(ads).data
+        web = Webads()
+        web.Title = item["RealEstate_title"]
+        web.Type = item["RealEstate_type"]
+        web.TransactionType = item["RealEstate_trans"]
+        web.Adress = add
+        web.Description = item["RealEstate_desc"]
+        web.Price = pr
+        web.Rooms = item["RealEstate_pieces"]
+        web.Beds = item["RealEstate_nbrooms"]
+        web.Images = item["RealEstate_img"]
+        web.Features = featu
+        web.WebRealtor = Real
+        web.Creation_Date = item["Time"]
+        json_to_save = json.dumps(web.__dict__, default=str)
 
-        pprint(realtor, indent=2)
+
+
 
         es = Elasticsearch('localhost:9200', use_ssl=False, verify_certs=True)
         if es.ping():
@@ -183,16 +204,16 @@ def on_item_passed(item):
             print('sorry it couldnt connect!')
 
         try:
-            if es.indices.exists("testt"):
+            if es.indices.exists("testttestt1"):
                 print("Index already exists")
-            if not es.indices.exists("testt"):
+            if not es.indices.exists("testttestt1"):
                 # Ignore 400 means to ignore "Index Already Exist" error.
-                es.indices.create(index="testt", ignore=400, body=realtor)
+                es.indices.create(index="testttestt1", ignore=400, body=json_to_save)
                 print('Created Index')
         except Exception as ex:
             print(str(ex))
         try:
-                 es.index(index="testt", doc_type="info", body=realtor, request_timeout=30)
+                 es.index(index="testttestt1", doc_type="info", body=json_to_save, request_timeout=30)
 
         except Exception as ex:
             print('Error in indexing data')
@@ -283,118 +304,41 @@ if __name__ == "__main__":
          # execute only if run as a script
         main()
 
+class WebRealto(object):
+    def __init__(self,id=None ,nom=None, siren=None,Adresse=None ,phone=None, logo=None, site=None, profile=None):
+        self.externId = id
+        self.Realtor_Name = nom
+        self.Realtor_Siren = siren
+        self.Realtor_Address = Adresse
+        self.Realtor_Phone_Number = phone
+        self.Realtor_Logo = logo
+        self.Realtor_Seloger_Profile = profile
+        self.Realtor_Website = site
+class Feature(object):
+    def __init__(self,surf=None, surf_unite=None, feat=None):
+        self.Realestate_Surface = surf
+        self.Realestate_Surface_Unite = surf_unite
+        self.RealEstate_Features = feat
+class Price(object):
+    def __init__(self,prix=None, price_unite=None):
+        self.Realestate_Price = prix
+        self.Realestate_Price_Unite = price_unite
+class Address(object):
+    def __init__(self,address=None, zip=None):
+        self.RealEstate_Adress = address
+        self.RealEstate_Zip_Code = zip
 
-
-
-
-
-
-
-class Surf(Schema):
-    Surface = fields.String()
-    SurfaceUnite = fields.String()
-
-class Bed(Schema):
-    Chambres = fields.String()
-
-class Room(Schema):
-    Pieces = fields.String()
-
-class Adress(Schema):
-    Ville = fields.String()
-    ZipCode = fields.String()
-
-
-class Prix(Schema):
-    Price = fields.String()
-    PriceUnit = fields.String()
-
-
-class id(Schema):
-    externId = fields.String()
-
-
-
-class WebRealto(Schema):
-    externID = fields.String()
-    Name = fields.String()
-    Phone = fields.String()
-    Siren = fields.String()
-    Adress = fields.String()
-    LogoUrl = fields.String()
-class time(Schema):
-    CreationDate = fields.String()
-
-class desc(Schema):
-    Description = fields.String()
-
-class type(Schema):
-    Type = fields.String()
-
-class transtype(Schema):
-    TransactionType = fields.String()
-
-class titre(Schema):
-    Title = fields.String()
-
-class tes(Schema):
-    Feature = fields.String()
-
-
-class WebAds(Schema):
-    TransactionType = fields.Nested(transtype())
-    Type = fields.Nested(type())
-    externId = fields.Nested(id())
-    Description = fields.Nested(desc())
-    Rooms = fields.Nested(Room())
-    Beds = fields.Nested(Bed())
-    Surface = fields.Nested(Surf())
-    Adresse = fields.Nested(Adress())
-    Price = fields.Nested(Prix())
-    WebRealtor = fields.Nested(WebRealto())
-    CreationDate = fields.Nested(time())
-    Title = fields.Nested(titre())
-    Features = fields.Nested(tes())
-
-
-
-"""def process_consumer():
-    print("listing start")
-    hosts = [('localhost', 61613)]
-    # check connection if fail or not
-    conn = stomp.Connection(hosts)
-    conn.start()
-    conn.connect('admin', 'admin', wait=True)
-    crawlingprocess = CrawlerProcess(get_project_settings())
-
-    listner = QueueListener(conn, '/queue/scrapy.seloger.ads.queue', crawlingprocess, 'adsspider', 1)
-    listner.start_consuming()
-
-    input("Enter to exit")
-
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('nb=')
-    nb = parser.parse_args()
-
-    for i in range(nb):
-        thread = Thread(target=process_consumer(), args=())
-        thread.start()
-        thread.join()
-        
-        
-        
-        
-        def check_positive(value):
-    ivalue = int(value)
-    if ivalue <= 0:
-        raise argparse.ArgumentTypeError("%s is an invalid positive int value" % value)
-    return ivalue
-
-parser = argparse.ArgumentParser(...)
-parser.add_argument('foo', type=check_positive)
-        
-        
-        
-        """
-
+class Webads(object):
+    def __init__(self, type=None, transtype=None, desc=None ,Room=None, titre=None,date= None, Bed=None, img=None):
+        self.TransactionType = transtype
+        self.Type = type
+        self.Title = titre
+        self.Images = img
+        self.Description = desc
+        self.Rooms = Room
+        self.Beds = Bed
+        self.Adress = Address()
+        self.Price = Price()
+        self.WebRealtor = WebRealto()
+        self.Features = Feature()
+        self.Creation_Date = date

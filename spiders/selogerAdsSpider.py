@@ -95,7 +95,7 @@ class SelogerAdsSpider(scrapy.Spider):
         print("realestate_features: ")
         for elem in driver.find_elements_by_css_selector("div[class='u-left']"):
             feat.append(elem.text)
-            featur = ','.join(feat)
+            #featur = ','.join(feat)
 
         tr = response.xpath('//h1[@class="detail-title title1"]/text()').extract()
         tran = [p.split()[0] for p in tr]
@@ -172,8 +172,8 @@ class SelogerAdsSpider(scrapy.Spider):
         print("realestate_image: %s" % img)
 
         realtor = WebRealtor()
-        realtor["RealtorFeatures"] = None
-        realtor["RealtorFeatures"] = featur
+        realtor["RealEstateFeatures"] = None
+        realtor["RealEstateFeatures"] = feat
 
         realtor["RealtorWebId"] = None
         realtor["RealtorWebId"] = id
@@ -185,6 +185,8 @@ class SelogerAdsSpider(scrapy.Spider):
         realtor["RealtorAddress"] = address
         realtor["RealtorPhone"] = None
         realtor["RealtorPhone"] = phone
+        realtor["Realtor_Profile"] = None
+        realtor["Realtor_Profile"] = profile
         realtor["RealtorWebSite"] = None
         if not site :
             site = None
@@ -221,8 +223,6 @@ class SelogerAdsSpider(scrapy.Spider):
         realtor["Realtor_logo"] = logo
         realtor["RealEstate_img"] = None
         realtor["RealEstate_img"] = img
-        realtor["RealEstate_Profile"] = None
-        realtor["RealEstate_Profile"] = profile
 
 
         t = datetime.now()
@@ -316,13 +316,13 @@ class WebRealtor(scrapy.Item):
     RealEstate_zip = scrapy.Field()
     Realtor_logo = scrapy.Field()
     RealEstate_img = scrapy.Field()
-    RealEstate_Profile = scrapy.Field()
+    Realtor_Profile = scrapy.Field()
     RealEstate_trans = scrapy.Field()
     RealEstate_title = scrapy.Field()
 
     Time = scrapy.Field()
 
-    RealtorFeatures = scrapy.Field()
+    RealEstateFeatures = scrapy.Field()
 
 
 
