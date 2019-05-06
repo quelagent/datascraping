@@ -14,7 +14,7 @@ from elasticsearch import Elasticsearch
 from marshmallow import Schema, fields, pprint
 import argparse
 import json
-
+import jsonpickle
 
 
 crawlerResults = None
@@ -45,7 +45,7 @@ class Address(object):
         self.RealEstate_Zip_Code = RealEstate_Zip_Code
 
 class Webads( object):
-    def __init__(self, type=None, transtype=None,addresse=Address,prix = Price,realtor = WebRealto,fea=Feature , desc=None ,Room=None, titre=None,date= None, Bed=None, img=None):
+    def __init__(self, type=None, transtype=None,addresse=None,prix = None,realtor = None,fea=None , desc=None ,Room=None, titre=None,date= None, Bed=None, img=None):
         self.TransactionType = transtype
         self.Type = type
         self.Title = titre
@@ -212,35 +212,40 @@ def on_item_passed(item):
         Real.Realtor_Website = item["RealtorWebSite"]
 
         #Real.Realtor_Seloger_Profile = item["Realtor_Profile"]
+        rea = json.dumps(Real.__dict__)
 
         add = Address()
         add.RealEstate_Adress = item["RealEstate_Adress"]
         add.RealEstate_Zip_Code = item["RealEstate_zip"]
+        ad = json.dumps(add.__dict__)
 
         pr = Price()
         pr.Realestate_Price = item["RealEstate_price"]
         pr.Realestate_Price_Unite = "€ FAI*"
+        pri = json.dumps(pr.__dict__)
 
         featu = Feature()
         featu.Realestate_Surface = item["RealEstate_surface"]
         featu.Realestate_Surface_Unite = "m²"
         featu.RealEstate_Features = item["RealtorFeatures"]
+        fea = json.dumps(featu.__dict__)
 
         web = Webads()
         web.Title = item["RealEstate_title"]
         web.Type = item["RealEstate_type"]
         web.TransactionType = item["RealEstate_trans"]
-        web.Adress = add
+        web.Adress = ad
         web.Description = item["RealEstate_desc"]
-        web.Price = pr
+        web.Price = pri
         web.Rooms = item["RealEstate_pieces"]
         web.Beds = item["RealEstate_nbrooms"]
         web.Images = item["RealEstate_img"]
-        web.Features = featu
-        web.WebRealtor = Real
+        web.Features = fea
+        web.WebRealtor = rea
         web.Creation_Date = item["Time"]
 
-        json_to_save = json.dumps(web.__dict__, lambda o: o.__dict__, indent=4, default=str)
+        json_to_save = json.dumps(web.__dict__, default=str)
+
 
 
 
