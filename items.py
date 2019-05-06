@@ -11,3 +11,8 @@ class ImmoscrapingItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     pass
+class ImageItem(scrapy.Item):
+    #other fields...
+    images = scrapy.Field()
+    realestate_image_urls = scrapy.Field()
+    #other fields...

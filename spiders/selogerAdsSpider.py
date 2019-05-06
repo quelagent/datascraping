@@ -10,7 +10,7 @@ from datetime import datetime
 import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-
+from items import ImageItem
 
 chrome_options = Options()
 chrome_options.add_argument("--headless")
@@ -87,6 +87,13 @@ class SelogerAdsSpider(scrapy.Spider):
        scrapy_selector = Selector(text=driver.page_source)
        scrapy_selector.xpath('//div[@class="grid-flexible-height g-row g-row-30-sm g-row-50-xs"]')  # returns the list of selectors
         """
+
+    def url_join(self, urls, response):
+        joined_urls = []
+        for url in urls:
+            joined_urls.append(response.urljoin(url))
+
+        return joined_urls
     def get_RealotrDataFromAds(self, response):
         #element = driver.find_elements_by_css_selector("div[class='u-left']")
         #testt = element.text
@@ -171,9 +178,12 @@ class SelogerAdsSpider(scrapy.Spider):
         img = response.css('.carrousel_image_small::attr("src")').extract()
         print("realestate_image: %s" % img)
 
+        images = ImageItem()
+        images["realestate_image_urls"] = self.url_join(img, response)
+
         realtor = WebRealtor()
-        realtor["RealEstateFeatures"] = None
-        realtor["RealEstateFeatures"] = feat
+        realtor["RealtorFeatures"] = None
+        realtor["RealtorFeatures"] = feat
 
         realtor["RealtorWebId"] = None
         realtor["RealtorWebId"] = id
@@ -232,6 +242,8 @@ class SelogerAdsSpider(scrapy.Spider):
 
         return realtor
         driver.close()
+
+
 
     def parse(self, response):
         try:
@@ -322,7 +334,7 @@ class WebRealtor(scrapy.Item):
 
     Time = scrapy.Field()
 
-    RealEstateFeatures = scrapy.Field()
+    RealtorFeatures = scrapy.Field()
 
 
 

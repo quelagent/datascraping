@@ -73,9 +73,9 @@ DOWNLOADER_MIDDLEWARES = {
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'immoscraping.pipelines.ImmoscrapingPipeline': 300,
-    'scrapy.pipelines.images.ImagesPipeline': 1
 
 }
+ITEM_PIPELINES = {'scrapy.pipelines.images.ImagesPipeline': 1}
 
 
 IMAGES_STORE = r'C:\Users\Oussama\Desktop\Ads_Pictures_Profile'

@@ -14,7 +14,57 @@ from elasticsearch import Elasticsearch
 from marshmallow import Schema, fields, pprint
 import argparse
 import json
+
+
+
 crawlerResults = None
+
+class WebRealto(object):
+    def __init__(self,id=None ,nom=None, siren=None,Adresse=None ,phone=None, logo=None, site=None, profile=None):
+        self.externId = id
+        self.Realtor_Name = nom
+        self.Realtor_Siren = siren
+        self.Realtor_Address = Adresse
+        self.Realtor_Phone_Number = phone
+        self.Realtor_Logo = logo
+        self.Realtor_Seloger_Profile = profile
+        self.Realtor_Website = site
+
+class Feature(object):
+    def __init__(self,surf=None, surf_unite=None, feat=None):
+        self.Realestate_Surface = surf
+        self.Realestate_Surface_Unite = surf_unite
+        self.RealEstate_Features = feat
+class Price(object):
+    def __init__(self,prix=None, price_unite=None):
+        self.Realestate_Price = prix
+        self.Realestate_Price_Unite = price_unite
+class Address(object):
+    def __init__(self,RealEstate_Adress=None, RealEstate_Zip_Code=None):
+        self.RealEstate_Adress = RealEstate_Adress
+        self.RealEstate_Zip_Code = RealEstate_Zip_Code
+
+class Webads( object):
+    def __init__(self, type=None, transtype=None,addresse=Address,prix = Price,realtor = WebRealto,fea=Feature , desc=None ,Room=None, titre=None,date= None, Bed=None, img=None):
+        self.TransactionType = transtype
+        self.Type = type
+        self.Title = titre
+        self.Images = img
+        self.Description = desc
+        self.Rooms = Room
+        self.Beds = Bed
+        self.Creation_Date = date
+        self.Adress = addresse
+        self.Price = prix
+        self.WebRealtor = realtor
+        self.Features = fea
+
+
+
+
+
+
+
 
 
 class ScrapyError(Exception):
@@ -140,14 +190,10 @@ def on_item_passed(item):
         print(item["RealEstate_surface"])
         print(item["Realtor_logo"])
         print(item["RealEstate_img"])
-        print(item["Realtor_Profile"])
         print(item["RealEstate_zip"])
         print(item["RealEstate_trans"])
         print(item["RealEstate_title"])
         print(item["Time"])
-
-        feat = []
-        feat.append(item["RealtorFeatures"])
         print(item["RealtorFeatures"])
 
         """
@@ -156,6 +202,7 @@ def on_item_passed(item):
         realtorjson = jsonencoder.encode(item)
         """
         Real = WebRealto()
+
         Real.externId = item["RealtorWebId"]
         Real.Realtor_Siren = item["RealtroSiren"]
         Real.Realtor_Name = item["RealtorName"]
@@ -163,7 +210,8 @@ def on_item_passed(item):
         Real.Realtor_Phone_Number = item["RealtorPhone"]
         Real.Realtor_Logo = item["Realtor_logo"]
         Real.Realtor_Website = item["RealtorWebSite"]
-        Real.Realtor_Seloger_Profile = item["Realtor_Profile"]
+
+        #Real.Realtor_Seloger_Profile = item["Realtor_Profile"]
 
         add = Address()
         add.RealEstate_Adress = item["RealEstate_Adress"]
@@ -176,8 +224,7 @@ def on_item_passed(item):
         featu = Feature()
         featu.Realestate_Surface = item["RealEstate_surface"]
         featu.Realestate_Surface_Unite = "m²"
-        for v in feat:
-            featu.RealEstate_Features = v
+        featu.RealEstate_Features = item["RealtorFeatures"]
 
         web = Webads()
         web.Title = item["RealEstate_title"]
@@ -192,8 +239,8 @@ def on_item_passed(item):
         web.Features = featu
         web.WebRealtor = Real
         web.Creation_Date = item["Time"]
-        json_to_save = json.dumps(web.__dict__, default=str)
 
+        json_to_save = json.dumps(web.__dict__, lambda o: o.__dict__, indent=4, default=str)
 
 
 
@@ -204,16 +251,16 @@ def on_item_passed(item):
             print('sorry it couldnt connect!')
 
         try:
-            if es.indices.exists("testttestt1"):
+            if es.indices.exists("testttestttestt1"):
                 print("Index already exists")
-            if not es.indices.exists("testttestt1"):
+            if not es.indices.exists("testttestttestt1"):
                 # Ignore 400 means to ignore "Index Already Exist" error.
-                es.indices.create(index="testttestt1", ignore=400, body=json_to_save)
+                es.indices.create(index="testttestttestt1", ignore=400, body=json_to_save)
                 print('Created Index')
         except Exception as ex:
             print(str(ex))
         try:
-                 es.index(index="testttestt1", doc_type="info", body=json_to_save, request_timeout=30)
+                 es.index(index="testttestttestt1", doc_type="info", body=json_to_save, request_timeout=340)
 
         except Exception as ex:
             print('Error in indexing data')
@@ -303,42 +350,3 @@ def main():
 if __name__ == "__main__":
          # execute only if run as a script
         main()
-
-class WebRealto(object):
-    def __init__(self,id=None ,nom=None, siren=None,Adresse=None ,phone=None, logo=None, site=None, profile=None):
-        self.externId = id
-        self.Realtor_Name = nom
-        self.Realtor_Siren = siren
-        self.Realtor_Address = Adresse
-        self.Realtor_Phone_Number = phone
-        self.Realtor_Logo = logo
-        self.Realtor_Seloger_Profile = profile
-        self.Realtor_Website = site
-class Feature(object):
-    def __init__(self,surf=None, surf_unite=None, feat=None):
-        self.Realestate_Surface = surf
-        self.Realestate_Surface_Unite = surf_unite
-        self.RealEstate_Features = feat
-class Price(object):
-    def __init__(self,prix=None, price_unite=None):
-        self.Realestate_Price = prix
-        self.Realestate_Price_Unite = price_unite
-class Address(object):
-    def __init__(self,address=None, zip=None):
-        self.RealEstate_Adress = address
-        self.RealEstate_Zip_Code = zip
-
-class Webads(object):
-    def __init__(self, type=None, transtype=None, desc=None ,Room=None, titre=None,date= None, Bed=None, img=None):
-        self.TransactionType = transtype
-        self.Type = type
-        self.Title = titre
-        self.Images = img
-        self.Description = desc
-        self.Rooms = Room
-        self.Beds = Bed
-        self.Adress = Address()
-        self.Price = Price()
-        self.WebRealtor = WebRealto()
-        self.Features = Feature()
-        self.Creation_Date = date
