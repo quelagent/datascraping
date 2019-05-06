@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ecb3c3a8-fc33-44b1-8a67-fd9f6ba10355" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/immoscraping" beforeDir="false" afterPath="$PROJECT_DIR$/immoscraping" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/selogerAdsconsumer.py" beforeDir="false" afterPath="$PROJECT_DIR$/selogerAdsconsumer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spiders/selogerAdsSpider.py" beforeDir="false" afterPath="$PROJECT_DIR$/spiders/selogerAdsSpider.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,14 +32,18 @@
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/selogerAgencyAds.py">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="615">
+              <caret line="232" column="74" selection-start-line="232" selection-start-column="68" selection-end-line="232" selection-end-column="74" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spiders/selogerAdsSpider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="338" selection-start-line="338" selection-end-line="338" />
+            <state relative-caret-position="313">
+              <caret line="331" column="37" selection-start-line="331" selection-start-column="37" selection-end-line="331" selection-end-column="37" />
               <folding>
                 <element signature="e#24#37#0" expanded="true" />
               </folding>
@@ -73,8 +77,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/selogerAdsconsumer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="241" column="43" lean-forward="true" selection-start-line="241" selection-start-column="43" selection-end-line="241" selection-end-column="43" />
+            <state relative-caret-position="175">
+              <caret line="213" column="39" lean-forward="true" selection-start-line="213" selection-start-column="39" selection-end-line="213" selection-end-column="39" />
               <folding>
                 <element signature="e#27#68#0" expanded="true" />
               </folding>
@@ -89,6 +93,8 @@
       <find>images</find>
       <find>featur</find>
       <find>[&quot;RealtorFeatures&quot;]</find>
+      <find>profil</find>
+      <find>profile</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -166,7 +172,7 @@
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.24330357" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="0" visible="true" weight="0.36988544" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="0" visible="true" weight="0.3584288" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="2" />
       <window_info anchor="bottom" id="Message" order="3" />
@@ -216,12 +222,16 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/selogerAgencyAds.py">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="232" column="74" selection-start-line="232" selection-start-column="68" selection-end-line="232" selection-end-column="74" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spiders/selogerAdsSpider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="338" selection-start-line="338" selection-end-line="338" />
+        <state relative-caret-position="313">
+          <caret line="331" column="37" selection-start-line="331" selection-start-column="37" selection-end-line="331" selection-end-column="37" />
           <folding>
             <element signature="e#24#37#0" expanded="true" />
           </folding>
@@ -230,8 +240,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/selogerAdsconsumer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="241" column="43" lean-forward="true" selection-start-line="241" selection-start-column="43" selection-end-line="241" selection-end-column="43" />
+        <state relative-caret-position="175">
+          <caret line="213" column="39" lean-forward="true" selection-start-line="213" selection-start-column="39" selection-end-line="213" selection-end-column="39" />
           <folding>
             <element signature="e#27#68#0" expanded="true" />
           </folding>

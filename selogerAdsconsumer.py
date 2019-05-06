@@ -210,8 +210,7 @@ def on_item_passed(item):
         Real.Realtor_Phone_Number = item["RealtorPhone"]
         Real.Realtor_Logo = item["Realtor_logo"]
         Real.Realtor_Website = item["RealtorWebSite"]
-
-        #Real.Realtor_Seloger_Profile = item["Realtor_Profile"]
+        Real.Realtor_Seloger_Profile = item["RealEstate_Profile"]
         rea = json.dumps(Real.__dict__)
 
         add = Address()

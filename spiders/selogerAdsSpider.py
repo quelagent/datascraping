@@ -195,8 +195,8 @@ class SelogerAdsSpider(scrapy.Spider):
         realtor["RealtorAddress"] = address
         realtor["RealtorPhone"] = None
         realtor["RealtorPhone"] = phone
-        realtor["Realtor_Profile"] = None
-        realtor["Realtor_Profile"] = profile
+        realtor["RealEstate_Profile"] = None
+        realtor["RealEstate_Profile"] = profile
         realtor["RealtorWebSite"] = None
         if not site :
             site = None
@@ -328,7 +328,7 @@ class WebRealtor(scrapy.Item):
     RealEstate_zip = scrapy.Field()
     Realtor_logo = scrapy.Field()
     RealEstate_img = scrapy.Field()
-    Realtor_Profile = scrapy.Field()
+    RealEstate_Profile = scrapy.Field()
     RealEstate_trans = scrapy.Field()
     RealEstate_title = scrapy.Field()
 
