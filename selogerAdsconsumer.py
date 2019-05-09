@@ -14,7 +14,6 @@ from elasticsearch import Elasticsearch
 from marshmallow import Schema, fields, pprint
 import argparse
 import json
-import jsonpickle
 
 
 crawlerResults = None
@@ -29,23 +28,36 @@ class WebRealto(object):
         self.Realtor_Logo = logo
         self.Realtor_Seloger_Profile = profile
         self.Realtor_Website = site
+    def __repr__(self):
+        return '{externId:'+ self.externId + ', Realtor_Name:'+ self.Realtor_Name+ ', Realtor_Siren:'+ self.Realtor_Siren+', Realtor_Address:'+ self.Realtor_Address+', Realtor_Phone_Number:'+ self.Realtor_Phone_Number+', Realtor_Logo:'+ str(self.Realtor_Logo)+', Realtor_Seloger_Profile:'+ self.Realtor_Seloger_Profile+', Realtor_Website:'+ self.Realtor_Website+'}'
+
+
 
 class Feature(object):
     def __init__(self,surf=None, surf_unite=None, feat=None):
         self.Realestate_Surface = surf
         self.Realestate_Surface_Unite = surf_unite
         self.RealEstate_Features = feat
+    def __repr__(self):
+        return '{Realestate_Surface:'+ self.Realestate_Surface + ', Realestate_Surface_Unite:'+ self.Realestate_Surface_Unite+ ', RealEstate_Features:'+ self.RealEstate_Features+'}'
+
 class Price(object):
     def __init__(self,prix=None, price_unite=None):
         self.Realestate_Price = prix
         self.Realestate_Price_Unite = price_unite
+    def __repr__(self):
+        return '{Realestate_Price:'+ self.Realestate_Price + ', Realestate_Price_Unite:'+ self.Realestate_Price_Unite+ '}'
+
 class Address(object):
     def __init__(self,RealEstate_Adress=None, RealEstate_Zip_Code=None):
         self.RealEstate_Adress = RealEstate_Adress
         self.RealEstate_Zip_Code = RealEstate_Zip_Code
+    def __repr__(self):
+        return '{RealEstate_Adress:'+ self.RealEstate_Adress + ', RealEstate_Zip_Code:'+ self.RealEstate_Zip_Code+ '}'
 
-class Webads( object):
-    def __init__(self, type=None, transtype=None,addresse=None,prix = None,realtor = None,fea=None , desc=None ,Room=None, titre=None,date= None, Bed=None, img=None):
+
+class Webads( Price, Feature,Address, WebRealto):
+    def __init__(self, type=None, transtype=None, desc=None ,Room=None, titre=None,date= None, Bed=None, img=None):
         self.TransactionType = transtype
         self.Type = type
         self.Title = titre
@@ -54,10 +66,10 @@ class Webads( object):
         self.Rooms = Room
         self.Beds = Bed
         self.Creation_Date = date
-        self.Adress = addresse
-        self.Price = prix
-        self.WebRealtor = realtor
-        self.Features = fea
+        self.Adress = Address()
+        self.Price = Price()
+        self.WebRealtor = WebRealto()
+        self.Features = Feature()
 
 
 
@@ -201,6 +213,9 @@ def on_item_passed(item):
         jsonencoder = ScrapyJSONEncoder()
         realtorjson = jsonencoder.encode(item)
         """
+
+
+
         Real = WebRealto()
 
         Real.externId = item["RealtorWebId"]
@@ -211,37 +226,36 @@ def on_item_passed(item):
         Real.Realtor_Logo = item["Realtor_logo"]
         Real.Realtor_Website = item["RealtorWebSite"]
         Real.Realtor_Seloger_Profile = item["RealEstate_Profile"]
-        rea = json.dumps(Real.__dict__)
 
         add = Address()
         add.RealEstate_Adress = item["RealEstate_Adress"]
         add.RealEstate_Zip_Code = item["RealEstate_zip"]
-        ad = json.dumps(add.__dict__)
 
         pr = Price()
         pr.Realestate_Price = item["RealEstate_price"]
         pr.Realestate_Price_Unite = "€ FAI*"
-        pri = json.dumps(pr.__dict__)
 
         featu = Feature()
         featu.Realestate_Surface = item["RealEstate_surface"]
         featu.Realestate_Surface_Unite = "m²"
         featu.RealEstate_Features = item["RealtorFeatures"]
-        fea = json.dumps(featu.__dict__)
+        #fea = json.dumps(featu.__dict__)
 
         web = Webads()
         web.Title = item["RealEstate_title"]
         web.Type = item["RealEstate_type"]
         web.TransactionType = item["RealEstate_trans"]
-        web.Adress = ad
+        web.Adress = add
         web.Description = item["RealEstate_desc"]
-        web.Price = pri
+        web.Price = pr
         web.Rooms = item["RealEstate_pieces"]
         web.Beds = item["RealEstate_nbrooms"]
         web.Images = item["RealEstate_img"]
-        web.Features = fea
-        web.WebRealtor = rea
+        web.Features = featu
+        web.WebRealtor = Real
         web.Creation_Date = item["Time"]
+
+
 
         json_to_save = json.dumps(web.__dict__, default=str)
 
@@ -255,16 +269,16 @@ def on_item_passed(item):
             print('sorry it couldnt connect!')
 
         try:
-            if es.indices.exists("testttestttestt1"):
+            if es.indices.exists("realestate_description"):
                 print("Index already exists")
-            if not es.indices.exists("testttestttestt1"):
+            if not es.indices.exists("realestate_description"):
                 # Ignore 400 means to ignore "Index Already Exist" error.
-                es.indices.create(index="testttestttestt1", ignore=400, body=json_to_save)
+                es.indices.create(index="realestate_description", ignore=400, body=json_to_save)
                 print('Created Index')
         except Exception as ex:
             print(str(ex))
         try:
-                 es.index(index="testttestttestt1", doc_type="info", body=json_to_save, request_timeout=340)
+                 es.index(index="realestate_description", doc_type="infos", body=json_to_save, request_timeout=340)
 
         except Exception as ex:
             print('Error in indexing data')
